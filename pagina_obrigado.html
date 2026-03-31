@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Obrigado! Sua compra foi confirmada 🎉</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #EE1D52;
+    --teal: #00F2EA;
+    --black: #010101;
+    --dark: #0D0D0D;
+    --dark2: #161616;
+    --white: #FFFFFF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ===== CONFETTI HEADER ===== */
+  .success-bar {
+    background: linear-gradient(135deg, #00C4BE, #00F2EA);
+    text-align: center;
+    padding: 14px 20px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #010101;
+    letter-spacing: 0.3px;
+  }
+  .success-bar span { font-size: 18px; }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: var(--dark);
+    padding: 60px 20px 50px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 0%, rgba(0,242,234,0.18) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 90% 100%, rgba(238,29,82,0.12) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+  .hero-inner { position: relative; z-index: 2; max-width: 680px; margin: 0 auto; }
+
+  .check-circle {
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #00C4BE, #00F2EA);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 36px;
+    margin: 0 auto 24px;
+    box-shadow: 0 0 40px rgba(0,242,234,0.35);
+    animation: pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+  }
+  @keyframes pop {
+    0% { transform: scale(0); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(0,242,234,0.12);
+    border: 1px solid rgba(0,242,234,0.28);
+    border-radius: 100px; padding: 5px 16px; margin-bottom: 18px;
+    font-size: 11px; font-weight: 700; letter-spacing: 2px;
+    text-transform: uppercase; color: #00F2EA;
+  }
+
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(42px, 8vw, 72px);
+    line-height: 0.95; letter-spacing: 1px; margin-bottom: 16px;
+  }
+  .hero h1 .white { color: #fff; display: block; }
+  .hero h1 .gradient {
+    display: block;
+    background: linear-gradient(90deg, #00F2EA, #00C4BE 40%, #EE1D52);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+
+  .hero-sub {
+    font-size: 17px; color: rgba(255,255,255,0.60);
+    max-width: 500px; margin: 0 auto 28px; line-height: 1.65;
+  }
+  .hero-sub strong { color: #fff; }
+
+  /* Delivery info */
+  .delivery-box {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: rgba(0,242,234,0.08);
+    border: 1px solid rgba(0,242,234,0.22);
+    border-radius: 12px; padding: 12px 22px;
+    font-size: 14px; color: rgba(255,255,255,0.75);
+  }
+  .delivery-box strong { color: var(--teal); }
+
+  /* ===== DIVIDER ===== */
+  .section-divider {
+    text-align: center;
+    padding: 40px 20px 30px;
+    background: var(--black);
+  }
+  .divider-tag {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 11px; font-weight: 700; letter-spacing: 3px;
+    text-transform: uppercase; color: rgba(255,255,255,0.30);
+  }
+  .divider-tag::before, .divider-tag::after {
+    content: ''; flex: 0 0 40px; height: 1px;
+    background: rgba(255,255,255,0.10);
+  }
+
+  /* ===== UPSELL SECTION ===== */
+  .upsell-section {
+    background: var(--dark);
+    padding: 0 20px 60px;
+  }
+
+  .upsell-card {
+    max-width: 720px;
+    margin: 0 auto;
+    background: #0A0A0A;
+    border: 1px solid rgba(238,29,82,0.35);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 0 60px rgba(238,29,82,0.12);
+    position: relative;
+  }
+
+  /* Top red band */
+  .upsell-top-band {
+    background: linear-gradient(135deg, var(--red), #FF3366);
+    padding: 16px 28px;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 10px;
+  }
+  .utb-left { display: flex; align-items: center; gap: 12px; }
+  .utb-icon { font-size: 24px; }
+  .utb-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.80); display: block; }
+  .utb-title { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: #fff; letter-spacing: 0.5px; }
+  .utb-timer {
+    background: rgba(0,0,0,0.25);
+    border-radius: 8px; padding: 6px 14px;
+    font-size: 13px; color: #FFE566; font-weight: 700;
+    display: flex; align-items: center; gap: 6px;
+  }
+  #timer-upsell { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 2px; }
+
+  .upsell-body { padding: 32px 32px 28px; }
+
+  .upsell-headline {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(30px, 5vw, 48px);
+    line-height: 1.0; letter-spacing: 0.5px;
+    margin-bottom: 12px;
+  }
+  .upsell-headline .hl {
+    background: linear-gradient(90deg, var(--red), #FF6B8A);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .upsell-headline .hl2 {
+    background: linear-gradient(90deg, var(--teal), #00C4BE);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+
+  .upsell-desc {
+    font-size: 15px; color: rgba(255,255,255,0.60);
+    line-height: 1.7; margin-bottom: 28px; max-width: 580px;
+  }
+  .upsell-desc strong { color: #fff; }
+
+  /* What's inside grid */
+  .inside-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+  @media(max-width:520px) { .inside-grid { grid-template-columns: 1fr; } }
+
+  .inside-card {
+    background: var(--dark2);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px; padding: 16px 18px;
+    display: flex; gap: 12px; align-items: flex-start;
+  }
+  .ic-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: linear-gradient(135deg, rgba(238,29,82,0.15), rgba(0,242,234,0.10));
+    border: 1px solid rgba(238,29,82,0.20);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 17px; flex-shrink: 0;
+  }
+  .ic-content {}
+  .ic-num {
+    font-family: 'Bebas Neue', sans-serif; font-size: 22px;
+    background: linear-gradient(90deg, var(--red), var(--teal));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text; display: block; line-height: 1;
+  }
+  .ic-label { font-size: 12px; font-weight: 700; color: #fff; margin-bottom: 2px; }
+  .ic-desc { font-size: 11.5px; color: rgba(255,255,255,0.40); line-height: 1.4; }
+
+  /* Special offer box */
+  .offer-box {
+    background: linear-gradient(135deg, rgba(238,29,82,0.08), rgba(0,242,234,0.05));
+    border: 1px solid rgba(238,29,82,0.22);
+    border-radius: 14px; padding: 20px 24px; margin-bottom: 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 16px;
+  }
+  .offer-left {}
+  .offer-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 2.5px;
+    text-transform: uppercase; color: #FF6B8A; margin-bottom: 6px;
+  }
+  .offer-text { font-size: 15px; color: rgba(255,255,255,0.75); line-height: 1.55; }
+  .offer-text strong { color: #fff; }
+  .offer-right { text-align: center; flex-shrink: 0; }
+  .offer-old { font-size: 13px; color: rgba(255,255,255,0.25); text-decoration: line-through; display: block; }
+  .offer-new {
+    font-family: 'Bebas Neue', sans-serif; font-size: 52px;
+    color: #EE1D52; display: block; line-height: 1; letter-spacing: 1px;
+  }
+  .offer-save {
+    display: inline-block;
+    background: rgba(255,229,102,0.13); border: 1px solid rgba(255,229,102,0.25);
+    color: #FFE566; font-size: 10px; font-weight: 700;
+    padding: 2px 10px; border-radius: 100px; margin-top: 4px;
+  }
+
+  /* CTA Button */
+  .btn-upsell {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    width: 100%;
+    background: linear-gradient(135deg, var(--red), #FF3366);
+    color: #fff; font-family: 'DM Sans', sans-serif;
+    font-size: 18px; font-weight: 700;
+    text-decoration: none; padding: 20px 30px;
+    border-radius: 14px;
+    box-shadow: 0 8px 30px rgba(238,29,82,0.40);
+    transition: all 0.2s ease; cursor: pointer; border: none;
+    letter-spacing: 0.3px;
+    animation: pulse-btn 2.5s ease-in-out infinite;
+  }
+  @keyframes pulse-btn {
+    0%, 100% { box-shadow: 0 8px 30px rgba(238,29,82,0.40); }
+    50% { box-shadow: 0 8px 50px rgba(238,29,82,0.65); }
+  }
+  .btn-upsell:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 40px rgba(238,29,82,0.55);
+    animation: none;
+  }
+  .btn-upsell .arrow { font-size: 22px; }
+
+  .upsell-safe {
+    display: flex; align-items: center; justify-content: center;
+    gap: 6px; margin-top: 12px;
+    font-size: 12px; color: rgba(255,255,255,0.30);
+  }
+
+  /* Skip link */
+  .skip-link {
+    text-align: center; margin-top: 18px;
+  }
+  .skip-link a {
+    font-size: 12px; color: rgba(255,255,255,0.22);
+    text-decoration: underline; cursor: pointer;
+    transition: color 0.2s;
+  }
+  .skip-link a:hover { color: rgba(255,255,255,0.45); }
+
+  /* ===== WHAT'S NEXT ===== */
+  .next-section {
+    background: var(--black);
+    padding: 60px 20px;
+  }
+  .next-inner { max-width: 680px; margin: 0 auto; }
+  .next-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 38px; letter-spacing: 0.5px; margin-bottom: 28px;
+    text-align: center;
+  }
+  .next-title .hl {
+    background: linear-gradient(90deg, var(--teal), var(--red));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+
+  .steps-list { display: flex; flex-direction: column; gap: 14px; }
+  .step-item {
+    display: flex; gap: 16px; align-items: flex-start;
+    background: var(--dark2); border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px; padding: 18px 20px;
+  }
+  .step-num {
+    flex: 0 0 36px; height: 36px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--teal), #00C4BE);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Bebas Neue', sans-serif; font-size: 18px; color: #010101;
+    flex-shrink: 0;
+  }
+  .step-content {}
+  .step-title { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 3px; }
+  .step-desc { font-size: 13.5px; color: rgba(255,255,255,0.50); line-height: 1.55; }
+  .step-desc strong { color: rgba(255,255,255,0.80); }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--black);
+    text-align: center; padding: 30px 20px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    font-size: 12px; color: rgba(255,255,255,0.20); line-height: 1.8;
+  }
+
+  /* Floating badge */
+  .floating-badge {
+    position: fixed; bottom: 24px; right: 24px; z-index: 99;
+    background: linear-gradient(135deg, var(--red), #FF3366);
+    color: #fff; font-size: 13px; font-weight: 700;
+    padding: 12px 20px; border-radius: 100px;
+    box-shadow: 0 8px 30px rgba(238,29,82,0.50);
+    text-decoration: none;
+    animation: float 3s ease-in-out infinite;
+    display: flex; align-items: center; gap: 8px;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+  @media(max-width: 520px) { .floating-badge { display: none; } }
+</style>
+</head>
+<body>
+
+<!-- SUCCESS BAR -->
+<div class="success-bar">
+  <span>🎉</span> Compra confirmada! Seu ebook chegará no seu e-mail em instantes.
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="check-circle">✓</div>
+    <div class="hero-tag">✅ Pagamento Aprovado</div>
+    <h1>
+      <span class="white">BEM-VINDO AO</span>
+      <span class="gradient">TIME DOS QUE FATURAM!</span>
+    </h1>
+    <p class="hero-sub">
+      Seu ebook <strong>"Do Flop ao Milhão"</strong> foi confirmado e chegará no seu e-mail nos próximos minutos. Antes de ir — leia com atenção o que está abaixo. 👇
+    </p>
+    <div class="delivery-box">
+      📧 Entrega por e-mail · <strong>Acesso imediato</strong> · Verifique sua caixa de entrada
+    </div>
+  </div>
+</section>
+
+<!-- DIVIDER -->
+<div class="section-divider">
+  <div class="divider-tag">Oferta exclusiva para quem acabou de comprar</div>
+</div>
+
+<!-- UPSELL -->
+<section class="upsell-section">
+  <div class="upsell-card">
+
+    <!-- Top band -->
+    <div class="upsell-top-band">
+      <div class="utb-left">
+        <div class="utb-icon">🎁</div>
+        <div>
+          <span class="utb-label">Oferta Única — Só aparece aqui</span>
+          <div class="utb-title">Complemento Especial para Clientes</div>
+        </div>
+      </div>
+      <div class="utb-timer">
+        ⏳ Expira em: <span id="timer-upsell">14:59</span>
+      </div>
+    </div>
+
+    <div class="upsell-body">
+
+      <div class="upsell-headline">
+        Quer <span class="hl">resultados</span> ainda<br>
+        mais <span class="hl2">rápidos?</span>
+      </div>
+
+      <p class="upsell-desc">
+        Você já tem o mapa — agora pegue os <strong>atalhos prontos.</strong>
+        O Pack de Scripts e Templates Premium entrega tudo que você precisaria criar do zero:
+        scripts de live, legendas que vendem, roteiros virais e planilha de controle.
+        <strong>Copie, cole e poste.</strong>
+      </p>
+
+      <!-- Inside grid -->
+      <div class="inside-grid">
+        <div class="inside-card">
+          <div class="ic-icon">🔴</div>
+          <div class="ic-content">
+            <span class="ic-num">10</span>
+            <div class="ic-label">Scripts de Live</div>
+            <div class="ic-desc">Abertura, produto, urgência, presentes, encerramento e mais</div>
+          </div>
+        </div>
+        <div class="inside-card">
+          <div class="ic-icon">📝</div>
+          <div class="ic-content">
+            <span class="ic-num">20</span>
+            <div class="ic-label">Legendas Prontas</div>
+            <div class="ic-desc">Para cada nicho — beleza, casa, cozinha, moda e gadgets</div>
+          </div>
+        </div>
+        <div class="inside-card">
+          <div class="ic-icon">🎬</div>
+          <div class="ic-content">
+            <span class="ic-num">10</span>
+            <div class="ic-label">Roteiros Virais</div>
+            <div class="ic-desc">Gancho + desenvolvimento + CTA — estrutura completa</div>
+          </div>
+        </div>
+        <div class="inside-card">
+          <div class="ic-icon">📊</div>
+          <div class="ic-content">
+            <span class="ic-num">1</span>
+            <div class="ic-label">Planilha de Controle</div>
+            <div class="ic-desc">Vídeos, lives, produtos e faturamento mensal</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Offer box -->
+      <div class="offer-box">
+        <div class="offer-left">
+          <div class="offer-label">🔥 Condição especial — só para clientes</div>
+          <div class="offer-text">
+            Este pack normalmente custa <strong>R$37</strong>.<br>
+            Por ter comprado o ebook agora, você leva por apenas <strong>R$19</strong> — uma única vez, nessa tela.
+          </div>
+        </div>
+        <div class="offer-right">
+          <span class="offer-old">R$37</span>
+          <span class="offer-new">R$19</span>
+          <span class="offer-save">ECONOMIZE R$18</span>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <a href="https://pay.cakto.com.br/38n8wa3_826081" class="btn-upsell">
+        Sim! Quero o Pack por R$19 <span class="arrow">→</span>
+      </a>
+      <div class="upsell-safe">🔒 Pagamento seguro · Acesso imediato · Pix · Cartão · Boleto</div>
+
+      <div class="skip-link">
+        <a href="#proximo-passo">Não, obrigado — quero continuar sem o pack</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHAT'S NEXT -->
+<section class="next-section" id="proximo-passo">
+  <div class="next-inner">
+    <div class="next-title">Seu plano de ação<br><span class="hl">começa agora</span></div>
+
+    <div class="steps-list">
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-title">📧 Verifique seu e-mail</div>
+          <div class="step-desc">O link do ebook chegará nos próximos minutos. <strong>Verifique também a caixa de spam</strong> caso não apareça na caixa de entrada.</div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-title">📖 Leia o Capítulo 1 hoje</div>
+          <div class="step-desc">O segredo dos primeiros 3 segundos — esse capítulo já vai mudar como você posta vídeos <strong>a partir de amanhã.</strong></div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-title">🔍 Abra o Creator Search Insights</div>
+          <div class="step-desc">Antes de gravar qualquer vídeo novo, use a ferramenta do Cap. 2 para descobrir <strong>o que está bombando hoje.</strong></div>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-title">🔴 Faça sua primeira live esta semana</div>
+          <div class="step-desc">Siga o passo a passo do Cap. 4. Mesmo que seja curta — <strong>a consistência é o que separa quem fatura de quem fica no flop.</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Dudu Monetizador · Todos os direitos reservados</p>
+  <p style="margin-top:6px;">Dúvidas sobre sua compra? Entre em contato pelo TikTok <strong>@dudumonetizador</strong></p>
+</footer>
+
+<!-- Floating CTA -->
+<a href="https://pay.cakto.com.br/38n8wa3_826081" class="floating-badge">
+  🎁 Pack por R$19 →
+</a>
+
+<script>
+  // Countdown timer — 15 minutes
+  let total = 14 * 60 + 59;
+  const el = document.getElementById('timer-upsell');
+
+  function tick() {
+    const m = Math.floor(total / 60);
+    const s = total % 60;
+    el.textContent = String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+    if (total > 0) total--;
+    else {
+      el.textContent = '00:00';
+      clearInterval(interval);
+    }
+  }
+  tick();
+  const interval = setInterval(tick, 1000);
+
+  // Smooth scroll for skip link
+  document.querySelector('.skip-link a').addEventListener('click', function(e) {
+    e.preventDefault();
+    document.getElementById('proximo-passo').scrollIntoView({ behavior: 'smooth' });
+  });
+</script>
+</body>
+</html>
